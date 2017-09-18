@@ -29,7 +29,14 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * developed by Aaron Chen with help of Rory Hayashi
+ * issues to fix:
+ * 1) multiline support for reading/writing files 4 - 5 days
+ * 2) file directory window 2 days
+ * 3) UI improvement 2 days
+ * 4) scrollbars, bullet points, fonts, and other text features 4 - 5 days
+ */
 public class DisplayList extends JPanel implements TreeSelectionListener, ActionListener {
 
     private JTextArea textBox;
