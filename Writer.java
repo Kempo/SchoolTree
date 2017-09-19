@@ -23,23 +23,6 @@ public class Writer{
 	     System.out.println(s);
       }
    }
-   /**
-   public void setSubject(String sub){
-      subject = sub;
-   }
-   
-   public void setTopic(String top){
-      topic = top;
-   }
-   
-   public void setText(String t){
-      text = t;
-   }
-   
-   public void setFile(File f){
-      info = f;
-   }
-   **/
 
    public ArrayList<Subject> write() throws FileNotFoundException {
       boolean create = true;
@@ -74,7 +57,9 @@ public class Writer{
          print.println("<" + s.getName() + ">");
          for(Topic t : s.getList()){
             print.println("*" + t.getName() + "*");
-            print.println(t.getInfo());
+            for(String line : t.getInfo()) {
+               print.println(line);
+            }
          }
       }
       print.close();

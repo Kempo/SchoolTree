@@ -13,22 +13,6 @@ public class Remover{
       info = i;
    }
 
-   /**
-   public void setSubject(String sub){
-      subject = sub.toUpperCase();
-   }
-   
-   public void setTopic(String top){
-	   if(top == null) {
-		   top = "";
-	   }
-      topic = top.toUpperCase();
-   }
-
-   public void setFile(File f){
-      info = f;
-   }
-   **/
 
    public ArrayList<Subject> remove() throws FileNotFoundException {
       boolean removed = false;
@@ -60,6 +44,10 @@ public class Remover{
       //throw an error if the subject is not found
       return subjects;
    }
+
+   /**
+    * change fix fix fix convert to array
+    */
    public void saveData(ArrayList<Subject> categories) throws FileNotFoundException {
 	   
       PrintStream print = new PrintStream(info);

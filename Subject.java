@@ -16,6 +16,7 @@ public class Subject{
    public String getName() {
 	   return name;
    }
+
    public int getSize(){
       return topics.size();
    }

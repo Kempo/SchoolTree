@@ -21,6 +21,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -145,7 +146,10 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     }
 
     private void saveInformation() {
-        String edited = textBox.getText();
+
+        String[] edited = textBox.getText().split("\n"); // splits text box per line
+        ArrayList<String> array = new ArrayList<>(Arrays.asList(edited)); // creates an array list out of the text
+
         Subject currentSubject = null;
         for(Subject s : reader.getList()) {
             for(Topic t : s.getList()) {
@@ -159,8 +163,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             JOptionPane.showMessageDialog(null, "No new data detected.", "Error", JOptionPane.ERROR_MESSAGE, null);
         }
         if(currentSubject != null && currentTopic != null) {
-            Writer writer = new Writer(file, currentSubject.getName(), currentTopic.getName(), edited);
-            //System.out.println(currentSubject.getName() + "   " + currentTopic.getName());
+            Writer writer = new Writer(file, currentSubject.getName(), currentTopic.getName(), array);
             try {
                 reader.categories = writer.write();
                 writer.saveData(reader.categories);
@@ -172,6 +175,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             }
         }
     }
+
     @SuppressWarnings("serial")
     class addFrame extends JFrame {
         JEditorPane notesBox;
@@ -224,15 +228,16 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
                         JOptionPane.showMessageDialog(null, "No new data detected.", "Error", JOptionPane.ERROR_MESSAGE, null);
 
                     }else{
-
-                        Writer writer = new Writer(file, subjectBox.getText(), topicBox.getText(), notesBox.getText());
+                        String[] text = notesBox.getText().split("\n");
+                        ArrayList<String> textArray = new ArrayList<>(Arrays.asList(text));
+                        Writer writer = new Writer(file, subjectBox.getText(), topicBox.getText(), textArray);
                         try{
 
                             DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
 
-                            DefaultMutableTreeNode root = (DefaultMutableTreeNode)top; // Subjects parent folder
+                            DefaultMutableTreeNode root = top; // Subjects parent folder
 
-                            Topic t = new Topic(topicBox.getText(), notesBox.getText());
+                            Topic t = new Topic(topicBox.getText(), textArray);
                             DefaultMutableTreeNode topicNode = new DefaultMutableTreeNode(t);
                             Subject s = new Subject(subjectBox.getText());
                             s.add(t);
@@ -306,7 +311,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             JPanel panel = new JPanel();
 
             panel.setLayout(null);
-            topicList = new JComboBox<Topic>();
+            topicList = new JComboBox<>();
             subjectLabel = new JLabel();
             topicLabel = new JLabel();
             subjectLabel.setBounds(20, 15, 50, 10);
@@ -318,7 +323,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             panel.add(topicLabel);
             panel.add(subjectLabel);
             panel.add(topicList);
-            subjectList = new JComboBox<Subject>();
+            subjectList = new JComboBox<>();
             for(Subject s : reader.getList()) {
                 subjectList.addItem(s);
             }
@@ -372,7 +377,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
 
                     Remover remover = new Remover(file, subjectList.getSelectedItem().toString(), topic);
                     DefaultTreeModel model = (DefaultTreeModel)tree.getModel();
-                    DefaultMutableTreeNode root = (DefaultMutableTreeNode)top; // Subjects parent folder
+                    DefaultMutableTreeNode root = top; // Subjects parent folder
                     Subject selectedSubject = (Subject)subjectList.getSelectedItem();
                     Topic selectedTopic = (Topic)topicList.getSelectedItem();
 
@@ -450,10 +455,12 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     /** Sets the textbox to the notes. **/
     private void displayNotes(ArrayList<String> s) {
         String text = "";
-        for(String line : s) {
-            text = line + "\n";
+        if(s != null) {
+            for (String line : s) {
+                text = line + "\n";
+            }
+            textBox.setText(text);
         }
-        textBox.setText(text);
     }
 
     /** Returns whether the string is too long or not. **/
@@ -477,7 +484,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     }
 
     /**
-     * Create the GUI and show it.  For thread safety,
+     * Creates the GUI and shows it.  For thread safety,
      * this method should be invoked from the
      * event dispatch thread.
      */
@@ -509,7 +516,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
-        System.out.println("Please select a file.");
+        System.out.println("Please enter in a file path.");
         directory = scan.next();
         file = new File(directory);
         //Schedule a job for the event dispatch thread:

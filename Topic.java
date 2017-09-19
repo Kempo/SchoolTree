@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 
 public class Topic{
-	/**
-	 * TRANSITION OVER TO AN ARRAYLIST RATHER THAN A STRING OF TEXT FOR INFO
-	 */
+
 	   private String name;
 	   private ArrayList<String> info;
 	   
