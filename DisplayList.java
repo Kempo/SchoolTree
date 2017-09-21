@@ -457,9 +457,8 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
         String text = "";
             if(s != null) {
                 for (String line : s) {
-                    text = line + "\n";
+                    text += (line + "\n");
                 }
-                System.out.println(text);
                 textBox.setText(text);
             }
         }
