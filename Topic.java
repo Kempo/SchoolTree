@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class Topic{
 
 	   private String name;
-	   private ArrayList<String> info;
+	   private ArrayList<String> info = null;
 	   
 	   public Topic(String n, ArrayList<String> i){
 	      name = n;

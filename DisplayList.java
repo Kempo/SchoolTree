@@ -455,15 +455,16 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     /** Sets the textbox to the notes. **/
     private void displayNotes(ArrayList<String> s) {
         String text = "";
-        if(s != null) {
-            for (String line : s) {
-                text = line + "\n";
+            if(s != null) {
+                for (String line : s) {
+                    text = line + "\n";
+                }
+                System.out.println(text);
+                textBox.setText(text);
             }
-            textBox.setText(text);
         }
-    }
 
-    /** Returns whether the string is too long or not. **/
+        /** Returns whether the string is too long or not. **/
     private boolean exceedsLength(String s) {
         if(s.length() > 7) {
             return true;
