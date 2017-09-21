@@ -45,9 +45,6 @@ public class Remover{
       return subjects;
    }
 
-   /**
-    * change fix fix fix convert to array
-    */
    public void saveData(ArrayList<Subject> categories) throws FileNotFoundException {
 	   
       PrintStream print = new PrintStream(info);

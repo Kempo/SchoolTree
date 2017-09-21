@@ -20,10 +20,6 @@ public class Subject{
    public int getSize(){
       return topics.size();
    }
-   
-   public void setInfo(int i, ArrayList<String> s){
-      topics.get(i).setInfo(s);
-   }
 
    public Topic getTopic(int i ) { return topics.get(i); }
 

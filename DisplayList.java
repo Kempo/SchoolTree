@@ -49,7 +49,6 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     private Topic currentTopic;
     private static String directory = "C:/Users/ros_adchen/Desktop/words.txt";
     private static File file;
-
     private DefaultMutableTreeNode top = null;
 
     public DisplayList() {
