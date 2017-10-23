@@ -37,6 +37,7 @@ import java.awt.event.ActionListener;
  * 2) file directory window 2 days
  * 3) UI improvement 2 days
  * 4) scrollbars, bullet points, fonts, and other text features 4 - 5 days
+ * Hello, dis Ray S. I'm making it so you don't have to manually make a folder and text file, and then copy and paste the path of the f
  */
 public class DisplayList extends JPanel implements TreeSelectionListener, ActionListener {
 
@@ -565,12 +566,14 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             //fix this
             System.out.println("What would you like to name your project?");
             newProject = console.nextLine();
-
-            PrintWriter Coffee = (new PrintWriter("C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files\\" + newProject));
+            String scan = "C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files\\" + newProject;
+            File file = new File (scan);
+            PrintWriter Coffee = (new PrintWriter(scan));
             Coffee.println("test 1");
             Coffee.println("Test 2");
             Coffee.close();
             System.out.println("File:\"" + newProject + "\" Created");
+            initiateInterface(new Reader(new Scanner(file)));
 
         }
 
