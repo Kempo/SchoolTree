@@ -550,17 +550,28 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
 
             File theDir = new File("C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files");
             if (!theDir.exists()) {
+                theDir.mkdir();
+
+                //FIX THIS, MAKE IT SO YOU DONT HAVE TO MANUALLY RESTART THE Program
+                if (!theDir.exists()) {
+                    System.out.println("File unable to be made.\nPlease restart the program");
+                    System.exit(1);
+                }
+
                 System.out.println("Seems as though this is the first time using our app, Thanks!");
                 System.out.println("We just created a Save file in your computer where it will save all of the in-app data that you input.\n");
                 boolean result = false;
-                theDir.mkdir();
-                result = true;
+                //theDir.mkdir();
+                if (theDir.exists()) {
+                    result = true;
+                }
+                
 
                 if (result) {
                     System.out.println("Save File Created\n");
                     //initiateInterface(new Reader(console));
                 }
-
+            }
             }
             //This makes the txt inside of the School Tree Files folder
             //fix this
