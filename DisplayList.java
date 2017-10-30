@@ -492,8 +492,8 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
      * this method should be invoked from the
      * event dispatch thread.
      */
-    private static void initiateInterface(Reader r) {
-        reader = r;
+    private static void initiateInterface(String r) {
+        //reader = r;
         try {
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
@@ -539,16 +539,21 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
 
         // "starter" is the String that determines whether to create a new file or naw
         System.out.print("Would you like to Load, or Create a project? (Load/Create)");
+
+        //the string that determines if you want to create or load a project
         String Starter;
         Starter = console.nextLine();
         Starter = Starter.substring(0,1);
+
         if (Starter.equalsIgnoreCase("l")) {
             //This is in the works, need to make a loading system
             System.out.println("Test Output, for Loading");
+
         } else if (Starter.equalsIgnoreCase("c")) {
             //This creates a new Load File
 
             File theDir = new File("C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files");
+
             if (!theDir.exists()) {
                 theDir.mkdir();
 
@@ -562,10 +567,10 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
                 System.out.println("We just created a Save file in your computer where it will save all of the in-app data that you input.\n");
                 boolean result = false;
                 //theDir.mkdir();
+
                 if (theDir.exists()) {
                     result = true;
                 }
-                
 
                 if (result) {
                     System.out.println("Save File Created\n");
@@ -584,7 +589,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             Coffee.println("Test 2");
             Coffee.close();
             System.out.println("File:\"" + newProject + "\" Created");
-            initiateInterface(new Reader(new Scanner(file)));
+            initiateInterface(scan);
 
         }
 
@@ -611,6 +616,6 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             initiateInterface(new Reader(scan));
         }
     */
-    }
+    //}
 
 }
