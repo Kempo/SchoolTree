@@ -20,6 +20,7 @@ import javax.swing.tree.TreeSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.PrintWriter;
@@ -492,7 +493,24 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
      * this method should be invoked from the
      * event dispatch thread.
      */
-    private static void initiateInterface(String r) {
+    private static void initiateInterface(String fLocation) throws FileNotFoundException {
+
+        //THIS IS IN BETA, i am a beta
+
+//            public File[] finder(r){
+//                File dir = new File(r);
+//
+//                return dir.listFiles(new FilenameFilter() {
+//                    public boolean accept(File dir, String filename)
+//                    { return filename.endsWith(".txt"); }
+//                } );
+//
+//            }
+        //System.out.print(fLocation);
+
+        File fileDIR = new File();
+        Scanner input = new Scanner(new File(fileDIR));
+
         //reader = r;
         try {
             UIManager.setLookAndFeel(
@@ -511,6 +529,8 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
         frame.pack();
         frame.setVisible(true);
     }
+
+
     /** TO BE USED **/
     class directoryFinder extends JFrame {
 
@@ -585,8 +605,8 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             String scan = "C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files\\" + newProject;
             File file = new File (scan);
             PrintWriter Coffee = (new PrintWriter(scan));
-            Coffee.println("test 1");
-            Coffee.println("Test 2");
+            //Coffee.println("test 1");
+            //Coffee.println("Test 2");
             Coffee.close();
             System.out.println("File:\"" + newProject + "\" Created");
             initiateInterface(scan);
