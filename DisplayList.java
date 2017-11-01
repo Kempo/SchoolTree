@@ -49,7 +49,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     private JMenu menu;
     private static Reader reader = null;
     private Topic currentTopic;
-    private static String directory = "C:/Users/ros_adchen/Desktop/words.txt";
+    //private static String directory = "C:/Users/ros_adchen/Desktop/words.txt";
     private static File file;
     private DefaultMutableTreeNode top = null;
     private String name;
@@ -493,25 +493,8 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
      * this method should be invoked from the
      * event dispatch thread.
      */
-    private static void initiateInterface(String fLocation) throws FileNotFoundException {
-
-        //THIS IS IN BETA, i am a beta
-
-//            public File[] finder(r){
-//                File dir = new File(r);
-//
-//                return dir.listFiles(new FilenameFilter() {
-//                    public boolean accept(File dir, String filename)
-//                    { return filename.endsWith(".txt"); }
-//                } );
-//
-//            }
-        //System.out.print(fLocation);
-
-        File fileDIR = new File();
-        Scanner input = new Scanner(new File(fileDIR));
-
-        //reader = r;
+    private static void initiateInterface(Reader r) {
+        reader = r;
         try {
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
@@ -529,6 +512,42 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
         frame.pack();
         frame.setVisible(true);
     }
+//    private static void initiateInterface(String fLocation) throws FileNotFoundException {
+//
+//        //THIS IS IN BETA, i am a beta
+//
+////            public File[] finder(r){
+////                File dir = new File(r);
+////
+////                return dir.listFiles(new FilenameFilter() {
+////                    public boolean accept(File dir, String filename)
+////                    { return filename.endsWith(".txt"); }
+////                } );
+////
+////            }
+//        //System.out.print(fLocation);
+//
+//        //File fileDIR = new File(fLocation);
+//        Scanner input = new Scanner(new File(fLocation));
+//
+//        reader = new Reader(input);
+//        try {
+//            UIManager.setLookAndFeel(
+//                    UIManager.getSystemLookAndFeelClassName());
+//        } catch (Exception e) {
+//            System.err.println("Couldn't use system look and feel.");
+//        }
+//        //Create and set up the window.
+//        JFrame frame = new JFrame("School Tree");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //Add content to the window.
+//        frame.add(new DisplayList());
+//        frame.setJMenuBar(menuBar);
+//        //Display the window.
+//        frame.pack();
+//        frame.setVisible(true);
+//    }
 
 
     /** TO BE USED **/
@@ -609,7 +628,10 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
             //Coffee.println("Test 2");
             Coffee.close();
             System.out.println("File:\"" + newProject + "\" Created");
-            initiateInterface(scan);
+
+
+            Scanner input = new Scanner(new File(scan));
+            initiateInterface(new Reader(input));
 
         }
 
