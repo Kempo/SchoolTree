@@ -49,7 +49,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     private JMenu menu;
     private static Reader reader = null;
     private Topic currentTopic;
-    //private static String directory = "C:/Users/ros_adchen/Desktop/words.txt";
+    private static String directory = "directory path here";
     private static File file;
     private DefaultMutableTreeNode top = null;
     private String name;
