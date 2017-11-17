@@ -19,12 +19,13 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeSelectionModel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.PrintWriter;
+import java.util.Arrays;
+import java.io.File;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -37,6 +38,7 @@ import java.awt.event.ActionListener;
  * 2) file directory window 2 days
  * 3) UI improvement 2 days
  * 4) scrollbars, bullet points, fonts, and other text features 4 - 5 days
+ * Hello, dis Ray S. I'm making it so you don't have to manually make a folder and text file, and then copy and paste the path of the f
  */
 public class DisplayList extends JPanel implements TreeSelectionListener, ActionListener {
 
@@ -50,6 +52,10 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     private static String directory = "directory path here";
     private static File file;
     private DefaultMutableTreeNode top = null;
+    private String name;
+    private JFrame f = new JFrame();
+//    private FileSetup;
+
 
     public DisplayList() {
 
@@ -454,15 +460,15 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
     /** Sets the textbox to the notes. **/
     private void displayNotes(ArrayList<String> s) {
         String text = "";
-            if(s != null) {
-                for (String line : s) {
-                    text += (line + "\n");
-                }
-                textBox.setText(text);
+        if(s != null) {
+            for (String line : s) {
+                text += (line + "\n");
             }
+            textBox.setText(text);
         }
+    }
 
-        /** Returns whether the string is too long or not. **/
+    /** Returns whether the string is too long or not. **/
     private boolean exceedsLength(String s) {
         if(s.length() > 7) {
             return true;
@@ -506,14 +512,131 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
         frame.pack();
         frame.setVisible(true);
     }
+//    private static void initiateInterface(String fLocation) throws FileNotFoundException {
+//
+//        //THIS IS IN BETA, i am a beta
+//
+////            public File[] finder(r){
+////                File dir = new File(r);
+////
+////                return dir.listFiles(new FilenameFilter() {
+////                    public boolean accept(File dir, String filename)
+////                    { return filename.endsWith(".txt"); }
+////                } );
+////
+////            }
+//        //System.out.print(fLocation);
+//
+//        //File fileDIR = new File(fLocation);
+//        Scanner input = new Scanner(new File(fLocation));
+//
+//        reader = new Reader(input);
+//        try {
+//            UIManager.setLookAndFeel(
+//                    UIManager.getSystemLookAndFeelClassName());
+//        } catch (Exception e) {
+//            System.err.println("Couldn't use system look and feel.");
+//        }
+//        //Create and set up the window.
+//        JFrame frame = new JFrame("School Tree");
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        //Add content to the window.
+//        frame.add(new DisplayList());
+//        frame.setJMenuBar(menuBar);
+//        //Display the window.
+//        frame.pack();
+//        frame.setVisible(true);
+//    }
+
+
     /** TO BE USED **/
     class directoryFinder extends JFrame {
 
     }
 
-    @SuppressWarnings("resource")
-    public static void main(String[] args) {
+    private void load() {
+        f = new JFrame("Loading Screen");
+        f.setLocation(500,500);
+        f.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        f.getContentPane().setLayout(new GridLayout(2,0));
+        JTextField field = new JTextField(20);
+        f.add(field);
+    }
 
+    @SuppressWarnings("resource")
+    public static void main(String[] args) throws FileNotFoundException{
+        Scanner console = new Scanner (System.in);
+
+        //This is primarily for creating new load files,
+        String newProject;
+
+        //We need the User's Username to get the save location
+        System.out.print("Username?(all lowercase): ros_");
+        String UserName;
+        UserName = console.nextLine();
+
+        // "starter" is the String that determines whether to create a new file or naw
+        System.out.print("Would you like to Load, or Create a project? (Load/Create)");
+
+        //the string that determines if you want to create or load a project
+        String Starter;
+        Starter = console.nextLine();
+        Starter = Starter.substring(0,1);
+
+        if (Starter.equalsIgnoreCase("l")) {
+            //This is in the works, need to make a loading system
+            System.out.println("Test Output, for Loading");
+
+        } else if (Starter.equalsIgnoreCase("c")) {
+            //This creates a new Load File
+
+            File theDir = new File("C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files");
+
+            if (!theDir.exists()) {
+                theDir.mkdir();
+
+                //FIX THIS, MAKE IT SO YOU DONT HAVE TO MANUALLY RESTART THE Program
+                if (!theDir.exists()) {
+                    System.out.println("File unable to be made.\nPlease restart the program");
+                    System.exit(1);
+                }
+
+                System.out.println("Seems as though this is the first time using our app, Thanks!");
+                System.out.println("We just created a Save file in your computer where it will save all of the in-app data that you input.\n");
+                boolean result = false;
+                //theDir.mkdir();
+
+                if (theDir.exists()) {
+                    result = true;
+                }
+
+                if (result) {
+                    System.out.println("Save File Created\n");
+                    //initiateInterface(new Reader(console));
+                }
+            }
+            }
+            //This makes the txt inside of the School Tree Files folder
+            //fix this
+            System.out.println("What would you like to name your project?");
+            newProject = console.nextLine();
+            String scan = "C:\\Users\\" + "ros_" + UserName + "\\Documents\\School Tree Files\\" + newProject;
+            File file = new File (scan);
+            PrintWriter Coffee = (new PrintWriter(scan));
+            //Coffee.println("test 1");
+            //Coffee.println("Test 2");
+            Coffee.close();
+            System.out.println("File:\"" + newProject + "\" Created");
+
+
+            Scanner input = new Scanner(new File(scan));
+            initiateInterface(new Reader(input));
+
+        }
+
+
+        /*
         Scanner scan = new Scanner(System.in);
         System.out.println("Please enter in a file path.");
         directory = scan.next();
@@ -534,6 +657,7 @@ public class DisplayList extends JPanel implements TreeSelectionListener, Action
         if(scan != null) {
             initiateInterface(new Reader(scan));
         }
-    }
+    */
+    //}
 
 }
